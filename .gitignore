@@ -6,7 +6,6 @@ __pycache__/
 venv/
 .venv/
 env/
-.Python
 
 # Datos crudos por defecto excluidos
 data/*.csv
@@ -27,12 +26,10 @@ debug_*.html
 # Editor / IDE
 .vscode/
 .idea/
-*.swp
 
 # OS
 .DS_Store
 Thumbs.db
-desktop.ini
 
-# Backup files genéricos
+# Backup files genericos
 *.bak
