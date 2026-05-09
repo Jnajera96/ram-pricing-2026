@@ -30,8 +30,8 @@ HEADERS = {
     "Accept-Encoding": "gzip, deflate",  # SIN br (lección día 1)
 }
 
-BASE_URL = "https://www.newegg.com/Memory/Category/ID-17?PageSize=36&page={}"
-MAX_PAGES = 15
+BASE_URL = "https://www.newegg.com/p/pl?N=100007611%204131&page={}"
+MAX_PAGES = 10
 SLEEP_BETWEEN_REQUESTS = 2.5
 CHECKPOINT_EVERY = 5
 
