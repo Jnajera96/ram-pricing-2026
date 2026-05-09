@@ -2,21 +2,37 @@
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
 venv/
 .venv/
 env/
+.Python
 
-# Datos crudos (los regeneramos con el scraper)
+# Datos crudos por defecto excluidos
 data/*.csv
-*.csv
 
-# Editor
+# PERO permitimos los datasets clave del proyecto
+!data/ram_raw.csv
+!data/ram_clean.csv
+
+# Backups y checkpoints siempre excluidos
+data/*_backup.csv
+data/*_checkpoint_*.csv
+data/*_old_*.csv
+
+# Debug HTML
+debug_*.html
+*.html
+
+# Editor / IDE
 .vscode/
 .idea/
+*.swp
 
 # OS
 .DS_Store
 Thumbs.db
+desktop.ini
 
-# Debug
-debug_*.html
+# Backup files genéricos
+*.bak
