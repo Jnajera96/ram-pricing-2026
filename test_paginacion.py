@@ -88,4 +88,4 @@ for config in URLS_TEST:
             print(f"\n   ⚠️  VEREDICTO: paginación PARCIAL (hay productos repetidos)")
         else:
             print(f"\n   ✅ VEREDICTO: paginación FUNCIONA (productos diferentes en cada página)")
-    print()
+    print() 

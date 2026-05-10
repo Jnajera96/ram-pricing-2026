@@ -1,0 +1,6 @@
+query_id,label_corto,pre_mediana_ms,post_mediana_ms,speedup,mejora_pct,plan_pre,plan_post,complejidad_post
+Q1_filtro_categorico,Q1 · ddr=DDR5,1.982100002351217,1.575550006236881,1.2580368725238746,20.51107389294567,SCAN ram_products,SEARCH ram_products USING INDEX idx_ddr_type (ddr_type=?),O(log n)
+Q2_filtro_numerico,Q2 · cap≥32GB,1.131349999923259,1.0005999938584864,1.1306716039049511,11.556989974246834,SCAN ram_products,SEARCH ram_products USING INDEX idx_capacity_gb (capacity_gb>?),O(log n)
+Q3_topN_ordenado,Q3 · top10 precio,0.2086000022245571,0.19250000332249328,1.0836363564892602,7.718120196725707,SCAN ram_products | USE TEMP B-TREE FOR ORDER BY,SCAN ram_products | USE TEMP B-TREE FOR ORDER BY,O(n log n)
+Q4_agregacion_groupby,Q4 · GROUP brand,0.2543000009609386,0.265499998931773,0.9578154500342858,-4.404246137834185,SCAN ram_products | USE TEMP B-TREE FOR GROUP BY,SCAN ram_products USING INDEX idx_brand_normalized,O(log n)
+Q5_compuesto,Q5 · DDR5 + precio,0.5283499922370538,0.5856499992660247,0.9021599810453632,-10.845085241008611,SCAN ram_products,SEARCH ram_products USING INDEX idx_ddr_type (ddr_type=?),O(log n)

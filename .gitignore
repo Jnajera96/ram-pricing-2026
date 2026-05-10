@@ -33,3 +33,14 @@ Thumbs.db
 
 # Backup files genericos
 *.bak
+# DB temporal del test de escalado (regenerable, ~5-10 MB)
+data/ram_scaling_test.db
+
+# Permitir explícitamente la DB principal del proyecto
+!data/ram_market.db
+
+# Permitir CSVs de resultados de benchmark
+!data/bench_pre_results.csv
+!data/bench_post_results.csv
+!data/benchmark_comparison.csv
+!data/scaling_benchmark.csv
