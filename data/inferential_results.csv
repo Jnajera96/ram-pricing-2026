@@ -1,0 +1,4 @@
+test,pregunta,estadistico,p_value,effect_size,magnitud_efecto,conclusion
+Welch t-test,DDR4 vs DDR5,17.8293,4.436506393158801e-42,d=2.196,muy grande,DDR5 significativamente más caro (3.86x)
+ANOVA + Tukey,Diferencias por DDR,F=269.2378,2.5823918525609793e-71,η²=0.608,grande (60.8%),Jerarquía DDR3 < DDR4 < DDR5 (todos pares sig.)
+ANOVA + Tukey,Diferencias por marca,F=19.8380,2.2222282524603052e-17,η²=0.224,grande (22.4%),"Premium (CORSAIR, G.SKILL, Kingston) vs económica (Team, Crucial, Other)"
