@@ -42,7 +42,7 @@ Pipeline integral de Ciencia de Datos aplicado al mercado de memoria RAM: desde 
 | 12 | lun 18 may | Buffer + ensayo final | ⏳ |
 | 🎯 | **mar 19 may** | **Entrega + defensa oral** | 🔒 |
 
-**Progreso actual: 42% · 8+ commits · 0 bloqueos**
+**Progreso actual: 50% · 4+ commits · 0 bloqueos**
 
 ---
 
