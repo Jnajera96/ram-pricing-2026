@@ -32,8 +32,8 @@ Pipeline integral de Ciencia de Datos aplicado al mercado de memoria RAM: desde 
 | 2 | vie 8 may | Scraper de producción + parsers regex | ✅ Completo |
 | 3 | sáb 9 may | Limpieza, feature engineering y EDA visual | ✅ Completo |
 | 4 | dom 10 may | SQLite + benchmark empírico de complejidad O() | ✅ Completo |
-| 5 | lun 11 may | Análisis estadístico inferencial | ⏳ Próximo |
-| 6 | mar 12 may | Modelo 1 — Regresión lineal multivariada | ⏳ |
+| 5 | lun 11 may | Análisis estadístico inferencial | ✅ Completo |
+| 6 | mar 12 may | Modelo 1 — Regresión lineal multivariada | ⏳ Próximo |
 | 7 | mié 13 may | Modelo 2 — K-Means clustering | ⏳ |
 | 8 | jue 14 may | Análisis empírico de complejidad ML | ⏳ |
 | 9 | vie 15 may | Diseño del póster académico | ⏳ |
