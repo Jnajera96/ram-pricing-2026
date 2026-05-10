@@ -1,14 +1,24 @@
 # 🧠 Optimización Asintótica en la Predicción del Mercado de Memoria RAM
 
 > **Proyecto académico** · Universidad de Guadalajara · Mayo 2026
-> **Autor:** José Carmen Najera Ortiz (coordinador técnico)
 > **Materia:** Ciencia de Datos · Asymptotic Notation + Bayesian Inference
 
-Pipeline integral de Ciencia de Datos aplicado al mercado de memoria RAM: desde la extracción vía web scraping en Newegg hasta el análisis de complejidad computacional y modelado predictivo. El proyecto integra programación, bases de datos SQL, estadística, matemáticas aplicadas y análisis asintótico bajo un sprint comprimido de 12 días.
+## 👥 Equipo de trabajo
+
+| Integrante | Rol |
+|---|---|
+| **José Carmen Najera Ortiz** | Coordinador técnico · Scraping · ML · Análisis de complejidad |
+| **Juan Pablo Cruz** | Análisis SQL · Benchmark · Queries analíticas |
+| **Diego De Jesús** | Comunicación visual · Diseño del póster · Defensa oral |
+| **Bernardo Maciel** | Análisis estadístico · EDA · Tests de hipótesis |
 
 ---
 
-## 🎯 Pregunta de investigación
+## 📖 Resumen ejecutivo
+
+Pipeline integral de Ciencia de Datos aplicado al mercado de memoria RAM: desde la extracción vía web scraping en Newegg hasta el análisis empírico de complejidad computacional, modelado predictivo y comunicación visual. El proyecto integra programación, bases de datos SQL, estadística, matemáticas aplicadas y análisis asintótico bajo un sprint comprimido de 12 días.
+
+**Pregunta de investigación:**
 
 > ¿Qué variables técnicas de un módulo de RAM (capacidad, frecuencia, tipo DDR, latencia CAS, marca) son los predictores más fuertes del precio de mercado, y cómo se reduce la complejidad computacional del pipeline desde 𝒪(n) hasta 𝒪(1) en cada etapa del análisis?
 
@@ -21,47 +31,35 @@ Pipeline integral de Ciencia de Datos aplicado al mercado de memoria RAM: desde 
 | 1 | jue 7 may | Reconocimiento de Newegg + setup del entorno | ✅ Completo |
 | 2 | vie 8 may | Scraper de producción + parsers regex | ✅ Completo |
 | 3 | sáb 9 may | Limpieza, feature engineering y EDA visual | ✅ Completo |
-| 4 | dom 10 may | SQLite + benchmark de complejidad O() | ⏳ Próximo |
-| 5 | lun 11 may | Análisis estadístico inferencial | ⏳ |
+| 4 | dom 10 may | SQLite + benchmark empírico de complejidad O() | ✅ Completo |
+| 5 | lun 11 may | Análisis estadístico inferencial | ⏳ Próximo |
 | 6 | mar 12 may | Modelo 1 — Regresión lineal multivariada | ⏳ |
 | 7 | mié 13 may | Modelo 2 — K-Means clustering | ⏳ |
-| 8 | jue 14 may | Análisis empírico de complejidad | ⏳ |
+| 8 | jue 14 may | Análisis empírico de complejidad ML | ⏳ |
 | 9 | vie 15 may | Diseño del póster académico | ⏳ |
 | 10 | sáb 16 may | Redacción y pulido del póster | ⏳ |
 | 11 | dom 17 may | Ensayo de defensa oral | ⏳ |
 | 12 | lun 18 may | Buffer + ensayo final | ⏳ |
 | 🎯 | **mar 19 may** | **Entrega + defensa oral** | 🔒 |
 
-**Progreso actual: 33% · 5 commits · 0 bloqueos**
+**Progreso actual: 42% · 8+ commits · 0 bloqueos**
 
 ---
 
-## 📊 Resultados actuales (cierre Día 3)
+## 📊 Resultados acumulados (cierre Día 4)
 
-### Dataset extraído y limpio
+### 1. Dataset extraído y limpio
 
 | Métrica | Día 2 (raw) | Día 3 (clean) |
 |---|---|---|
 | **Total productos** | 359 | **350** |
-| **Filas duplicadas** | 0 (deduplicación 0.8%) | 0 |
 | **Tipos DDR distintos** | 4 (3 + unknown) | **3** (DDR3, DDR4, DDR5) |
-| **Marcas únicas (originales)** | 25+ | 5 + Other |
+| **Marcas únicas** | 25+ | 5 + Other |
 | **Tiempo de extracción** | ~38 s | — |
 | **Columnas finales** | 12 | **17** (con features derivados) |
+| **Cobertura `cas_latency`** | 63.8% nativa | **100%** (con imputación) |
 
-### Cobertura final de features (Día 3)
-
-| Feature | Cobertura | Estado |
-|---|---|---|
-| `ddr_type` | 100.0% | ✅ |
-| `capacity_gb` | 100.0% | ✅ |
-| `speed_mhz` | 99.7% | ✅ |
-| `cas_latency_imputed` | 100.0% | ✅ (imputación condicional) |
-| `brand_normalized` | 100.0% | ✅ |
-| `price_per_gb` | 100.0% | ✅ |
-| `log_price` | 100.0% | ✅ |
-
-### Distribución del dataset limpio
+### 2. Distribución del dataset limpio
 
 ```
 Tipos DDR:
@@ -90,7 +88,7 @@ Estadísticas de price_per_gb:
   media: $13.16 / GB   (mercado balanceado)
 ```
 
-### Hallazgos estadísticos del Día 3
+### 3. Hallazgos estadísticos clave (Día 3)
 
 **Correlaciones más fuertes con `price_usd`:**
 
@@ -112,6 +110,64 @@ Asimetría log_price:  -0.61   ← prácticamente normal
 
 La asimetría se reduce ~6× tras aplicar `log(1+x)`, cumpliendo el supuesto de normalidad aproximada de los residuos requerido por el teorema de Gauss-Markov.
 
+### 4. Base de datos SQLite (Día 4)
+
+```
+ram_market.db
+├── Tabla:      ram_products
+├── Filas:      350
+├── Columnas:   18 (id PK + 17 features)
+├── Tamaño sin índices:  140 KB
+├── Tamaño con índices:  160 KB (+14.3% overhead)
+└── Índices B-Tree creados:
+    ├── idx_ddr_type           → acelera filtros categóricos
+    ├── idx_capacity_gb        → acelera filtros numéricos de rango
+    └── idx_brand_normalized   → acelera agregaciones GROUP BY
+```
+
+### 5. Análisis empírico de complejidad asintótica (Día 4)
+
+#### 5.1 Benchmark base · 5 queries con n=350 (mediana de N=100 ejecuciones)
+
+| Query | Tipo | Plan SIN índice | Plan CON índice | Pre (ms) | Post (ms) | Speedup |
+|---|---|---|---|---|---|---|
+| Q1 | Filtro categórico (`ddr_type='DDR5'`) | SCAN | SEARCH USING INDEX | 1.98 | 1.58 | **1.26×** |
+| Q2 | Filtro numérico (`capacity_gb ≥ 32`) | SCAN | SEARCH USING INDEX | 1.13 | 1.00 | **1.13×** |
+| Q3 | Top-N ordenado | SCAN + TEMP B-TREE | SCAN + TEMP B-TREE | 0.21 | 0.19 | 1.08× |
+| Q4 | Agregación GROUP BY | SCAN + TEMP B-TREE | SCAN USING COVERING INDEX | 0.25 | 0.27 | 0.96× |
+| Q5 | Filtro compuesto AND | SCAN | SEARCH USING INDEX | 0.53 | 0.59 | 0.90× |
+
+#### 5.2 Test de escalado · n ∈ [350, 50,000]
+
+Para validar la teoría asintótica empíricamente, se replicó la tabla a tamaños progresivos y se midió cómo escala el speedup con `n`:
+
+| n | Q1 sin idx (ms) | Q1 con idx (ms) | Q1 speedup | Q2 speedup | **Q4 speedup** |
+|---|---|---|---|---|---|
+| 350 | 1.83 | 1.68 | 1.08× | 1.54× | **1.61×** |
+| 1,000 | 5.59 | 3.70 | 1.51× | 1.13× | **2.66×** |
+| 5,000 | 18.99 | 25.85 | 0.73× | 0.85× | **8.65×** |
+| 10,000 | 34.16 | 46.48 | 0.74× | 0.76× | **8.14×** |
+| 50,000 | 192.75 | 243.61 | 0.79× | 0.61× | **13.79×** |
+
+**Hallazgo central:** el speedup de Q4 (con covering index) crece de **1.6× → 13.8×** al escalar el dataset 143 veces, **validando empíricamente la predicción teórica del análisis asintótico**.
+
+---
+
+## 🎓 Hallazgo metodológico crítico · La paradoja del índice
+
+El experimento reveló un fenómeno educativo importante: **la indexación NO es universalmente beneficiosa**. Tres comportamientos distintos según la selectividad de la query:
+
+### Caso 1 · Queries con baja selectividad (Q1, Q2)
+Cuando una query retorna **>30% del dataset**, usar un índice degrada el rendimiento porque el costo de saltos al B-Tree supera el beneficio. Para n=50,000, Q1 (que retorna 65% del dataset) es **27% más lenta con índice**.
+
+### Caso 2 · Queries con covering index (Q4)
+Cuando el índice contiene toda la información que la query necesita (sin volver a la tabla), el speedup es claro y crece monotónicamente con `n`. Q4 valida la teoría asintótica con 13.8× a n=50,000.
+
+### Caso 3 · Queries con sort temporal (Q3)
+SQLite ya construye un B-Tree en memoria para ordenamientos. Indexar columnas adicionales no aporta porque el costo dominante es el sort.
+
+**Conclusión defendible:** la decisión de indexar requiere conocer el patrón de queries, no solo aplicar índices "por si acaso". Esta es una **lección práctica del trade-off entre teoría asintótica y rendimiento real**.
+
 ---
 
 ## 🛠️ Stack tecnológico
@@ -121,15 +177,16 @@ La asimetría se reduce ~6× tras aplicar `log(1+x)`, cumpliendo el supuesto de 
 | **Web Scraping** | `requests` + `BeautifulSoup4` + `lxml` |
 | **Procesamiento** | `pandas` + `numpy` |
 | **Visualización** | `matplotlib` + `seaborn` |
-| **Modelado ML** *(próximo)* | `scikit-learn` (LinearRegression + KMeans) |
-| **Persistencia** *(Día 4)* | `SQLite` + `SQLAlchemy` |
+| **Persistencia** | `SQLite` (módulo nativo de Python) |
+| **Benchmarking** | `time.perf_counter()` (resolución ns) + `statistics` |
+| **Modelado ML** *(Día 6+)* | `scikit-learn` (LinearRegression + KMeans) |
 | **Versionado** | Git + GitHub |
 
 ---
 
-## 🔬 Hallazgos técnicos clave
+## 🔬 Hallazgos técnicos del proyecto (acumulados)
 
-Cinco historias técnicas documentadas que demuestran resiliencia y rigor del pipeline.
+Seis historias técnicas documentadas que demuestran resiliencia y rigor del pipeline.
 
 ### 1. Bug de compresión Brotli (Día 1)
 
@@ -197,132 +254,158 @@ DDR5: CL=36  ← prior informativo actual
 
 Esta es la versión simplificada de un razonamiento bayesiano: incorporar conocimiento del dominio (las latencias típicas por generación) como **prior informativo** en lugar de tratar el missing data como aleatorio. El flag `cas_was_imputed` permite diferenciar valores observados vs imputados para análisis posterior.
 
+### 6. Paradoja del índice en SQLite (Día 4)
+
+Test de escalado a n=50,000 reveló que para queries con baja selectividad (>30% del dataset), los índices B-Tree DEGRADAN el rendimiento. Solo queries con covering index muestran el speedup teórico predicho.
+
+**Explicación técnica:** Cuando una query retorna muchas filas, usar un índice agrega overhead (saltos del árbol al disco) sin descartar suficientes filas para compensar. SQLite a veces detecta esto y elige el plan SCAN, pero en el experimento forzamos el uso del índice y observamos el efecto adverso.
+
+**Lección práctica:** la decisión de indexar requiere análisis del patrón real de queries. Esta es una **manifestación del límite del análisis asintótico**: el big-O describe el comportamiento cuando n → ∞, pero las constantes ocultas y los efectos de sistema importan en datasets reales.
+
 ---
 
 ## 📁 Estructura del proyecto
 
 ```
 Web_scraping/
-├── README.md                       ← Este archivo
-├── .gitignore                      ← Exclusiones de Git
+├── README.md                              ← Este archivo
+├── .gitignore                             ← Exclusiones de Git
 │
-├── Scraping de producción
-│   ├── scraper.py                  ← Scraper principal (~250 líneas)
-│   └── recalcular_cas.py           ← Reaplicar parser CL sin re-scrapear
+├── Scraping (Días 1-2)
+│   ├── scraper.py                         ← Scraper principal de Newegg
+│   ├── recalcular_cas.py                  ← Reaplicar parser CL sin re-scrapear
+│   └── web_scraping.py                    ← Hello world inicial
 │
 ├── Pipeline de datos (Día 3)
-│   ├── limpiar.py                  ← Pipeline de limpieza completo
-│   └── eda.py                      ← EDA visual + 3 figuras
+│   ├── limpiar.py                         ← Pipeline completo de limpieza
+│   └── eda.py                             ← EDA visual + 3 figuras
+│
+├── Análisis de complejidad (Día 4)
+│   ├── crear_db.py                        ← Construir ram_market.db
+│   ├── crear_indices.py                   ← Crear 3 índices B-Tree
+│   ├── bench_pre.py                       ← Benchmark SIN índices (Fase A)
+│   ├── bench_post.py                      ← Benchmark CON índices (Fase B)
+│   └── bench_escalado.py                  ← Test de escalado n ∈ [350, 50000]
 │
 ├── Tests y validación
-│   ├── test_parsers.py             ← Validación de los 7 parsers regex
-│   ├── test_minimo.py              ← Test aislado del parser CAS v3
-│   └── test_paginacion.py          ← Test de URLs alternativas Newegg
+│   ├── test_parsers.py                    ← Validación de los 7 parsers regex
+│   ├── test_minimo.py                     ← Test aislado del parser CAS v3
+│   └── test_paginacion.py                 ← Test de URLs alternativas Newegg
 │
-├── Diagnósticos y debugging
-│   ├── diagnostico.py              ← HTTP debugging (Día 1, Brotli)
-│   ├── diagnostico_cas.py          ← Cobertura CAS (Día 2)
-│   ├── diagnostico_duplicados.py   ← Detección de duplicación (Día 3)
-│   └── diagnostico_v2.py           ← Análisis post re-scraping (Día 3)
+├── Diagnósticos
+│   ├── diagnostico.py                     ← HTTP debugging Día 1
+│   ├── diagnostico_cas.py                 ← Cobertura CAS Día 2
+│   ├── diagnostico_duplicados.py          ← Detección duplicación Día 3
+│   └── diagnostico_v2.py                  ← Análisis post re-scraping Día 3
 │
-├── Referencia histórica
-│   └── web_scraping.py             ← Hello world inicial (Día 1)
+├── figures/                               ← Visualizaciones a 300 DPI
+│   ├── 01_correlation_heatmap.png         ← Matriz de correlación
+│   ├── 02_price_by_ddr.png                ← Premium por DDR
+│   ├── 03_log_transform.png               ← Justificación del log
+│   ├── 04_complexity_benchmark.png        ← Benchmark pre vs post
+│   └── 05_scaling_benchmark.png           ← Test de escalado (clave del póster)
 │
-├── figures/                        ← Visualizaciones a 300 DPI
-│   ├── 01_correlation_heatmap.png
-│   ├── 02_price_by_ddr.png
-│   └── 03_log_transform.png
-│
-└── data/                           ← Excluido del repo (regenerable)
-    ├── ram_raw.csv                 ← Dataset original 350 productos
-    ├── ram_clean.csv               ← Dataset limpio (Día 3)
-    ├── ram_raw_backup.csv          ← Backup defensivo
-    └── ram_checkpoint_p*.csv       ← Checkpoints intermedios
+└── data/
+    ├── ram_raw.csv                        ← 359 productos extraídos
+    ├── ram_clean.csv                      ← 350 productos limpios
+    ├── ram_market.db                      ← Base de datos SQLite
+    ├── bench_pre_results.csv              ← Tiempos sin índices
+    ├── bench_post_results.csv             ← Tiempos con índices
+    ├── benchmark_comparison.csv           ← Tabla comparativa pre/post
+    └── scaling_benchmark.csv              ← Test de escalado completo
 ```
 
 ---
 
-## ⚙️ Reproducir el pipeline
+## ⚙️ Reproducir el pipeline completo
 
-### Requisitos previos
+### Requisitos
 
-- Python 3.10 o superior
-- ~40 segundos para scraping completo
-- Conexión a internet estable
+- Python 3.10+
+- ~15 minutos para reproducir todo el pipeline (con test de escalado)
+- Conexión a internet estable (para el scraping)
 
 ### Setup del entorno
 
 ```bash
-# Clonar el repo
 git clone https://github.com/Jnajera96/ram-pricing-2026.git
 cd ram-pricing-2026
 
-# Crear entorno virtual
+# Entorno virtual
 python -m venv venv
+venv\Scripts\activate  # Windows
+# source venv/bin/activate  # Linux/Mac
 
-# Activar venv
-source venv/bin/activate          # Linux/Mac
-venv\Scripts\activate             # Windows
-
-# Instalar dependencias
+# Dependencias
 pip install requests beautifulsoup4 lxml pandas numpy scikit-learn \
-            matplotlib seaborn sqlalchemy jupyter
+            matplotlib seaborn sqlalchemy
 ```
 
 ### Ejecutar el pipeline completo
 
 ```bash
-# 1. Extracción (~40 s)
+# Día 2: Extracción (~40 s)
 python scraper.py
 
-# 2. Limpieza + Feature Engineering (~5 s)
+# Día 3: Limpieza + EDA visual (~10 s)
 python limpiar.py
-
-# 3. EDA visual (genera 3 figuras en /figures/)
 python eda.py
 
-# (Opcional) Validación aislada
-python test_parsers.py
-python test_minimo.py
+# Día 4: Base de datos + análisis de complejidad (~12 min)
+python crear_db.py        # ~2 s
+python bench_pre.py       # ~30 s
+python crear_indices.py   # ~1 s
+python bench_post.py      # ~30 s
+python bench_escalado.py  # ~10 min (test exhaustivo)
 ```
 
 ### Salida esperada
 
 ```
 🚀 Iniciando scraping de Newegg RAM
-   ...
 ✅ Scraping completado en ~38s
 💾 Dataset final: data/ram_raw.csv (359 filas)
 
-═════════════════════════════════════════════
 🧹 LIMPIEZA Y FEATURE ENGINEERING
-═════════════════════════════════════════════
-  -7 filas removidas (4 unknown DDR + 3 capacity=0)
   Cobertura CL: 63.8% → 85.5% nativo → 100% imputado
   Asimetría: 3.61 → -0.61
 ✅ ram_clean.csv (350 filas × 17 columnas)
 
-🎨 Generando 3 figuras a 300 DPI:
-  ✅ figures/01_correlation_heatmap.png
-  ✅ figures/02_price_by_ddr.png
-  ✅ figures/03_log_transform.png
+🎨 Generando 3 figuras a 300 DPI
+✅ figures/01_correlation_heatmap.png
+✅ figures/02_price_by_ddr.png
+✅ figures/03_log_transform.png
+
+📦 BLOQUE 1 · CONSTRUCCIÓN DE ram_market.db
+✅ Tabla `ram_products` creada con 350 filas
+
+🔑 BLOQUE 3 · CREACIÓN DE ÍNDICES B-TREE
+✅ 3 índices B-Tree creados (+14.3% storage overhead)
+
+📊 BLOQUE 5 · TEST DE ESCALADO
+✅ Speedup Q4: 1.61× (n=350) → 13.79× (n=50,000)
+✅ Validación empírica del análisis asintótico
 ```
 
 ---
 
 ## 🧮 Análisis asintótico del pipeline
 
-El proyecto entero cuenta una historia única: **cada etapa reduce la complejidad efectiva**, demostrando los conceptos de Asymptotic Notation aplicados a un caso real.
+El proyecto demuestra empíricamente la transición de complejidad en cada etapa:
 
 ```
-EXTRACCIÓN  · 𝒪(n · t_red)   → scraping secuencial dominado por I/O
-LIMPIEZA    · 𝒪(n)           → regex amortizado 𝒪(1) por fila
-SQL SCAN    · 𝒪(n)           → búsqueda sin índice (Día 4)
-SQL B-TREE  · 𝒪(log n)       → búsqueda con índice (Día 4)
+EXTRACCIÓN  · 𝒪(n · t_red)   → scraping secuencial dominado por I/O (~40s)
+LIMPIEZA    · 𝒪(n)           → regex amortizado 𝒪(1) por fila (~5s)
+SQL SCAN    · 𝒪(n)           → búsqueda lineal sin índice (medido)
+SQL B-TREE  · 𝒪(log n)       → búsqueda con índice (medido y validado)
 INFERENCIA  · 𝒪(1)           → modelo entrenado, predicción constante (Día 6)
 ```
 
-La **medición empírica** de estos tiempos será evidencia central del póster académico final.
+**Validación empírica del salto SCAN → SEARCH USING INDEX:**
+
+- Para n=350: speedup observado 1.08× a 1.61× (marginal, esperado para n pequeño)
+- Para n=50,000: speedup en Q4 alcanza **13.79×** confirmando crecimiento logarítmico
+- La gráfica `figures/05_scaling_benchmark.png` muestra la tendencia completa
 
 ---
 
@@ -330,13 +413,13 @@ La **medición empírica** de estos tiempos será evidencia central del póster 
 
 Cada decisión técnica fue tomada con criterio académico justificable:
 
-- **`dataclass` en lugar de `dict`:** impone tipado estricto desde el origen y evita bugs silenciosos como `cas_latency` siendo `str` en algunas filas. Filosofía contract-driven.
+- **`dataclass` en lugar de `dict`:** impone tipado estricto desde el origen y evita bugs silenciosos. Filosofía contract-driven.
 
 - **`try/except` por item, no por página:** granularidad de fallo correcta. Perder 1 producto cuesta 1 fila; abortar la página perdería 36. Filosofía *fail soft, log loud*.
 
 - **`time.sleep(2.5)` sin paralelismo:** los sitios web son I/O bound, no CPU bound. Paralelizar desde la misma IP solo acelera el bloqueo. La constante de espera es el costo de operar éticamente.
 
-- **Checkpoints intermedios cada 5 páginas:** misma lógica que un commit incremental en Git. Si Newegg me bloquea en página 8, ya tengo seguros los datos de las páginas 1-5.
+- **Checkpoints intermedios cada 5 páginas:** misma lógica que un commit incremental en Git.
 
 - **Rutas con `Path(__file__).parent`:** robustez ante CWD distintos. Práctica de portabilidad estándar.
 
@@ -344,44 +427,60 @@ Cada decisión técnica fue tomada con criterio académico justificable:
 
 - **Imputación condicional por mediana de DDR:** evita el sesgo de la media global y respeta la jerarquía de generaciones del hardware.
 
-- **Backup defensivo antes de sobrescribir CSV:** lección aprendida del Día 2, ahora aplicada sistemáticamente en `limpiar.py`.
+- **Backup defensivo antes de sobrescribir CSV:** lección aprendida del Día 2, ahora aplicada sistemáticamente.
 
-- **Validación empírica de paginación:** lección aprendida del Día 3. Antes de confiar en un endpoint paginado, comparar productos entre páginas 1, 2, 3 para validar que el servidor respeta el parámetro `&page=N`.
+- **Validación empírica de paginación:** lección del Día 3. Antes de confiar en un endpoint paginado, comparar productos entre páginas para validar que el servidor respeta `&page=N`.
+
+- **Schema SQL explícito antes de `df.to_sql()`:** evita inferencia automática de pandas; mantiene `NOT NULL`, `PK`, tipos correctos. Decisión consciente de producción vs exploración.
+
+- **`time.perf_counter()` en vez de `time.time()`:** resolución ns vs ms; monotónico; diseñado para benchmarking.
+
+- **Mediana en vez de media:** robusta a outliers de garbage collection y otras interferencias del SO.
+
+- **N=100 ejecuciones por query:** reduce varianza por √N (aplicación práctica del Teorema Central del Límite).
+
+- **Indexación selectiva (3 índices, no todos):** trade-off consciente entre velocidad de lectura y overhead de storage/escritura.
+
+- **Test de escalado a n=50,000:** validación más fuerte que evidencia con un único `n`. Demuestra el crecimiento del speedup con n, no solo un punto de medición.
 
 ---
 
 ## 🔮 Próximas etapas
 
-- **Día 4 (dom 10 may):** carga a SQLite, creación de índices B-Tree, benchmark empírico pre/post indexación con `EXPLAIN QUERY PLAN` y `time.perf_counter()`. Generar la **tabla y gráfica empírica de complejidad O(n) → O(log n)** que será el slide central del póster.
-- **Día 5 (lun 11 may):** estadística inferencial, tests de hipótesis (¿DDR5 es significativamente más caro que DDR4?), análisis ANOVA por marca.
+- **Día 5 (lun 11 may):** estadística inferencial. Tests de hipótesis (¿DDR5 significativamente más caro que DDR4? t-test). ANOVA por marca. Validación de normalidad con Shapiro-Wilk.
 - **Día 6 (mar 12 may):** regresión lineal multivariada con one-hot encoding de marcas y DDR. Métricas R², MAE, RMSE.
-- **Día 7 (mié 13 may):** K-Means clustering por segmento de mercado (precio_per_gb × cas_latency × capacity).
+- **Día 7 (mié 13 may):** K-Means clustering por segmento de mercado.
 - **Día 8 (jue 14 may):** medición empírica de complejidad de los modelos ML.
-- **Día 9-11 (vie 15 - dom 17):** póster A1 + ensayo de defensa oral.
+- **Día 9-11 (vie 15 - dom 17 may):** póster A1 + ensayos de defensa oral.
 - **Día 12 (lun 18 may):** buffer + ensayo final.
 
 ---
 
-## 📈 Visualizaciones disponibles
+## 📈 Visualizaciones generadas (5 figuras a 300 DPI)
 
-Ver la carpeta `/figures/` para las 3 visualizaciones generadas en el Día 3:
-
-1. **`01_correlation_heatmap.png`** — Matriz de correlación de Pearson entre todas las features numéricas. La gráfica estrella del proyecto.
+1. **`01_correlation_heatmap.png`** — Matriz de correlación de Pearson entre todas las features numéricas. Muestra `capacity_gb` ↔ `price_usd` con r=0.95. La gráfica estrella del proyecto.
 
 2. **`02_price_by_ddr.png`** — Comparación lado a lado de boxplots en escala USD lineal vs `log(1+precio)`. Demuestra el premium DDR5 sobre DDR4 sobre DDR3 y la estabilización de varianza con la transformación log.
 
 3. **`03_log_transform.png`** — Histogramas comparativos de la distribución original (asimetría +3.61) versus la log-transformada (asimetría -0.61). Justifica matemáticamente la transformación para regresión.
 
+4. **`04_complexity_benchmark.png`** — Comparación pre vs post-índices a n=350 con barras de speedup + proyección teórica de complejidad asintótica.
+
+5. **`05_scaling_benchmark.png`** — Test de escalado n ∈ [350, 50000] mostrando crecimiento del speedup con `n`. **Gráfica central del análisis asintótico para el póster.**
+
 ---
 
 ## 📚 Referencias y aprendizajes documentados
 
-- **Cormen, Leiserson, Rivest & Stein.** *Introduction to Algorithms* — marco asintótico y complejidad.
+- **Cormen, Leiserson, Rivest & Stein.** *Introduction to Algorithms* — marco asintótico, análisis de B-Trees.
 - **Gauss-Markov theorem** — supuestos de normalidad de residuos en regresión OLS.
 - **Pearson, K. (1895).** Coeficiente de asimetría — base de la decisión de transformación log.
+- **SQLite documentation** — `EXPLAIN QUERY PLAN`, optimización de índices, covering indexes.
 - **Documentación de `requests`** sobre [content negotiation](https://requests.readthedocs.io/) — origen del bug de Brotli del Día 1.
-- **Convenciones de SKU de fabricantes** (Kingston, Corsair, G.SKILL, XPG, Crucial, Patriot, Team Group) — derivadas empíricamente del scraping y documentadas.
+- **Convenciones de SKU de fabricantes** (Kingston, Corsair, G.SKILL, XPG, Crucial, Patriot, Team Group) — derivadas empíricamente del scraping.
 - **JEDEC standards for DDR memory** — referencia de timings típicos por generación.
+- **Bayesian Inference (UDG · 2026)** — aplicación de priors informativos en imputación condicional.
+- **Asymptotic Notation (UDG · 2026)** — análisis O(n), O(log n) aplicado a estructuras B-Tree reales.
 
 ---
 
@@ -391,6 +490,14 @@ Proyecto académico de uso educativo. El código se puede reusar bajo MIT Licens
 
 ---
 
-> *"Programar bien no es tener todo perfecto al primer intento — es saber diagnosticar, ajustar y documentar el aprendizaje."*
+> *"Programar bien no es tener todo perfecto al primer intento — es saber diagnosticar, ajustar y documentar el aprendizaje. Y a veces, los resultados negativos son los más educativos."*
 
-**Última actualización:** sábado 9 de mayo de 2026 · cierre del Día 3 · 33% del sprint completado · 5 historias técnicas documentadas
+**Última actualización:** domingo 10 de mayo de 2026 · cierre del Día 4 · 42% del sprint completado · 6 historias técnicas documentadas · 5 visualizaciones a 300 DPI
+
+---
+
+## 🤝 Reconocimientos
+
+Este proyecto representa un esfuerzo colaborativo del equipo de cuatro estudiantes de la Universidad de Guadalajara, integrando conocimientos de programación, bases de datos, estadística y análisis matemático en un sprint comprimido de 12 días.
+
+**Agradecimientos:** A los profesores de las materias de Asymptotic Notation y Bayesian Inference por proporcionar el marco teórico que da estructura al análisis empírico presentado.
