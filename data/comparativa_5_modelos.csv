@@ -1,0 +1,6 @@
+Modelo,Tipo,R²_test,CV_5_R²,RMSE_USD,MAE_USD,MAPE_pct,Tiempo_seg,Interpretable
+OLS (Día 6),Lineal,0.8758,,203.14,107.11,17.36,0.01,Alta
+K-Means (Día 7),Clustering,,,,,,0.05,Alta (centroides)
+Ridge (Día 7),Lineal regularizado,0.8686,0.8851,198.46,106.14,17.45,0.02,Alta
+Random Forest (Día 8),Ensemble bagging,0.902,0.9392,158.74,71.04,10.42,0.13,Parcial
+Gradient Boosting (Día 8),Ensemble boosting,0.9616242306659877,0.9600512209377964,125.03972876941657,52.02071462555947,8.316577352941461,0.11160899999958929,Parcial

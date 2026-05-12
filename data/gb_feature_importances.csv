@@ -1,0 +1,11 @@
+feature,importance
+capacity_gb,0.8559785073964046
+speed_mhz,0.0706794275081207
+ddr_group_DDR_legacy,0.03503022850679528
+cas_latency,0.016170472209646885
+brand_normalized_Other,0.008788327176948546
+num_sticks,0.0073551003969317
+brand_normalized_Crucial,0.002469394511277003
+brand_normalized_G.SKILL,0.0015587750137300224
+brand_normalized_Kingston,0.00095857015339354
+brand_normalized_Team,0.0006144297238530036
