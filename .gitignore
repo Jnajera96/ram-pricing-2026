@@ -1,46 +1,123 @@
-# Python
+# ===================================================================
+# .gitignore · RAM Pricing Prediction Project
+# University of Guadalajara · 2026
+# ===================================================================
+
+# ========== Python ==========
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+MANIFEST
+
+# ========== Virtual Environments ==========
 venv/
-.venv/
 env/
+ENV/
+.venv/
+.env/
+virtualenv/
 
-# Datos crudos por defecto excluidos
-data/*.csv
+# ========== Jupyter Notebooks ==========
+.ipynb_checkpoints/
+*.ipynb_checkpoints
 
-# PERO permitimos los datasets clave del proyecto
-!data/ram_raw.csv
-!data/ram_clean.csv
-
-# Backups y checkpoints siempre excluidos
-data/*_backup.csv
-data/*_checkpoint_*.csv
-data/*_old_*.csv
-
-# Debug HTML
-debug_*.html
-*.html
-
-# Editor / IDE
+# ========== IDE & Editors ==========
 .vscode/
 .idea/
-
-# OS
+*.swp
+*.swo
+*.swn
+*~
 .DS_Store
 Thumbs.db
 
-# Backup files genericos
+# ========== Project specific ==========
+# Logs
+*.log
+.migration_log.json
+
+# Backup files
+*-BACKUP-*
 *.bak
-# DB temporal del test de escalado (regenerable, ~5-10 MB)
+
+# ========== Data (large files) ==========
+# Mantener CSVs pequeños pero excluir bases SQLite muy pesadas
+# (Descomentar si tu .db es muy grande para GitHub)
+# data/database/*.db
+
+# Datasets temporales/intermedios
+data/ram_checkpoint_*.csv
+data/ram_raw_backup.csv
 data/ram_scaling_test.db
+*.tmp
+*.cache
 
-# Permitir explícitamente la DB principal del proyecto
-!data/ram_market.db
+# ========== Output files ==========
+# Comentar si quieres versionar los PDFs/PNGs generados
+# figures/*.pdf
+# figures/poster/*.svg
 
-# Permitir CSVs de resultados de benchmark
-!data/bench_pre_results.csv
-!data/bench_post_results.csv
-!data/benchmark_comparison.csv
-!data/scaling_benchmark.csv
+# ========== OS specific ==========
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# ========== Sensitive / Local config ==========
+.env.local
+.env.production
+config.local.json
+secrets.json
+
+# ========== Coverage & Testing ==========
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
