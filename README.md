@@ -97,10 +97,10 @@ graph LR
     style J fill:#e74c3c
 ```
 
-### 🔬 Six Methodological Paradigms
+### 🔬 Seis enfoques metodológicos
 
-The project applies **six independent paradigms** to triangulate findings.
-Convergence across paradigms strengthens validity.
+El proyecto aplica **seis enfoques independientes** para triangular 
+los resultados. La convergencia entre estos paradigmas refuerza su validez.
 
 | # | Paradigm | Method | Role |
 |---|----------|--------|------|
@@ -111,12 +111,12 @@ Convergence across paradigms strengthens validity.
 | 5 | Bagging Ensemble | Random Forest | Non-linear capture |
 | 6 | Boosting Ensemble | Gradient Boosting | Sequential learning |
 
-**All six converge on the same conclusion:** `capacity_gb` is the dominant
-predictor, followed by DDR generation, with brand premium as secondary.
+**Los seis llegan a la misma conclusión:** `capacity_gb` es la variable predictora principal,
+seguida de la generación DDR, mientras que el sobreprecio por marca resulta secundario.
 
 ---
 
-## 📁 Project Structure
+## 📁 Estructura del Proyecto
 
 ```
 ram-pricing-2026/
