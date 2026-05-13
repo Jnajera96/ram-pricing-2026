@@ -37,6 +37,11 @@ an academic project at **Universidad de Guadalajara**, it integrates web
 scraping, statistical inference, machine learning, and asymptotic complexity
 analysis.
 
+Este proyecto desarrolla un pipeline de ciencia de datos completo para predecir
+el precio de los módulos de memoria RAM a partir de sus especificaciones técnicas.
+Desarrollado como un proyecto académico en la Universidad de Guadalajara, integra 
+web scraping, inferencia estadística, machine learning y análisis de complejidad asintótica.
+
 > **Research question:** *"Does a real brand premium exist in the RAM memory
 > market, or is price explained solely by technical specifications?"*
 
