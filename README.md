@@ -329,7 +329,7 @@ This project was developed collaboratively at Universidad de Guadalajara:
 <td align="center" width="25%">
 <strong>José Najera</strong><br/>
 <sub>Project Lead</sub><br/>
-Architecture, scraping, SQL,<br/>
+Architecture, scraping,<br/>
 inference, K-Means, Ridge,<br/>
 RF, GB, complexity analysis
 </td>
@@ -348,7 +348,7 @@ benchmark analysis
 <td align="center" width="25%">
 <strong>Diego De Jesús</strong><br/>
 <sub>Visual Communication</sub><br/>
-Poster design,<br/>
+Poster design, SQL,<br/>
 defense materials
 </td>
 </tr>
