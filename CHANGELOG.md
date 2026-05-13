@@ -1,6 +1,3 @@
-Changelog · MD
-Copiar
-
 # 📝 Historial de Cambios
  
 Todos los cambios notables de este proyecto están documentados en este archivo.
