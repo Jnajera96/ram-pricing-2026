@@ -384,7 +384,7 @@ Product names, brands, and prices are property of their respective owners.
 ## 🤝 Acknowledgments
 
 - **Universidad de Guadalajara** for academic support
-- **Centro Universitario de Ciencias Exactas e Ingenierías** (CUCEI)
+- **Centro Universitario de Guadalajara** (CUGDL)
 - Open source community for the incredible tools used
 - The 350 RAM products that gave their data to science 💾
 
