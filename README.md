@@ -42,8 +42,8 @@ el precio de los módulos de memoria RAM a partir de sus especificaciones técni
 Desarrollado como un proyecto académico en la Universidad de Guadalajara, integra 
 web scraping, inferencia estadística, machine learning y análisis de complejidad asintótica.
 
-> **Research question:** *"Does a real brand premium exist in the RAM memory
-> market, or is price explained solely by technical specifications?"*
+> **Pregunta de investigación:** *"¿Existe un verdadero sobreprecio por marca en el
+> mercado de la memoria RAM, o el precio se explica únicamente por las especificaciones técnicas?"*
 
 **Spoiler:** Both are true. `capacity_gb` dominates (85.6% feature importance),
 but CORSAIR commands a **10-35% premium** controlling for technical features.
