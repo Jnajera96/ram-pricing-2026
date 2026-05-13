@@ -124,8 +124,8 @@ ram-pricing-2026/
 ├── 📄 README.md                    ⭐ This file
 ├── 📄 ROADMAP.md                   🛣️  Project vision
 ├── 📄 CHANGELOG.md                 📝 Version history
-├── 📄 LICENSE                       ⚖️  MIT License
-├── 📄 requirements.txt              📦 Dependencies
+├── 📄 LICENSE                      ⚖️  MIT License
+├── 📄 requirements.txt             📦 Dependencies
 │
 ├── 📁 src/                         💻 Modular source code
 │   ├── 01_scraping/                🕷️  Web scraping (Day 1-2)
